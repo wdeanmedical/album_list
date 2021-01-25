@@ -1,12 +1,13 @@
-# Trivia React Native
+# Album List
 
 ### Getting Started
 
 ```
-> git clone https://github.com/g2i/code-challenge-nick-sophinos.git
-> cd code-challenge-nick-sophinos
+> git clone https://github.com/wdeanmedical/album_list.git
+> cd album_list
 > yarn install
-> yarn start
+> yarn run react-native run-ios
+> yarn run react-native run-android
 ```
 
-![alt text](http://g.recordit.co/dqLWQUjKHu.gif "Application in action")
+![alt text](https://recordit.co/2oXS7qU3kg.gif "Application in action")
