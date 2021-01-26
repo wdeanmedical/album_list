@@ -1,6 +1,3 @@
-export const API_URL =
-  'https://opentdb.com/api.php?amount=10&difficulty=hard&type=boolean'
-
 export const TOKEN =
   'BQCz4_19Y78hgNhtFR5aaw1h0ymx0kLhuoO8OTQ0hjobruPBziKgTp5z4u3-i0otrA0NUmYT_lx80GYop4lweisH716SQDG_bq6qwwyqTWA9OM0BHSAOylZknft98KkLw7lPMdCbZ0pXY6664Y-s'
 
