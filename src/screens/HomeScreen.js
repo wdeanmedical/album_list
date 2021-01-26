@@ -9,10 +9,13 @@ import Styles from '../styles/Styles'
 
 const getArtists = artists => artists.map(artist => artist.name).join(', ')
 
+// eslint-disable-next-line react/prop-types
 const Item = ({ item, enterNotesScreen }) => {
+  // eslint-disable-next-line react/prop-types
   const { id, images, name, artists } = item
   return (
     <View style={Styles.listItem}>
+      {/* eslint-disable-next-line react/prop-types */}
       <Image source={{ uri: images[0].url }} style={Styles.itemImage} />
       <View style={Styles.itemText}>
         <Text style={Styles.albumName}>{name}</Text>
@@ -46,6 +49,7 @@ class HomeScreen extends Component {
   }
 
   enterNotesScreen = id => {
+    // eslint-disable-next-line react/prop-types
     this.props.navigation.navigate(Constants.NOTES_SCREEN, { id })
   }
 
@@ -85,6 +89,7 @@ HomeScreen.propTypes = {
 
 HomeScreen.defaultProps = {
   appInit: undefined,
+  albums: [],
 }
 
 export default connect(

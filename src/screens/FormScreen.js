@@ -21,6 +21,7 @@ class FormScreen extends Component {
   componentDidMount() {}
 
   submitNotes = () => {
+    // eslint-disable-next-line react/prop-types
     this.props.navigation.navigate(Constants.HOME_SCREEN)
   }
 
@@ -40,11 +41,15 @@ class FormScreen extends Component {
   }
 
   handleSubmit = () => {
+    // eslint-disable-next-line react/prop-types
     const { navigation } = this.props
+    // eslint-disable-next-line react/prop-types
     const { id } = navigation.state.params
     const { notes } = this.state
+    // eslint-disable-next-line react/prop-types
     const { submitNotes: dispatchSubmitNotes } = this.props
     dispatchSubmitNotes({ notes, id })
+    // eslint-disable-next-line react/prop-types
     navigation.navigate(Constants.HOME_SCREEN)
     this.notesSubmitAlert()
   }
@@ -82,12 +87,11 @@ const mapDispatchToProps = dispatch => ({
 })
 
 FormScreen.propTypes = {
-  appInit: PropTypes.func,
-  albums: PropTypes.array,
+  submitNotes: PropTypes.func,
 }
 
 FormScreen.defaultProps = {
-  appInit: undefined,
+  submitNotes: undefined,
 }
 
 export default connect(
