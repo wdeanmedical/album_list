@@ -16,7 +16,6 @@ class API {
   }
 
   static async submitNotes(notes) {
-    console.log('notes', notes)
     const payload = { notes }
     const data = await axios.get(POST_URL, payload).then(result => result.data)
     if (data.error) {

@@ -84,4 +84,24 @@ export default {
     color: Colors.white,
     fontSize: 24,
   },
+  spinner: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: Colors.white,
+  },
+  spinnerBody: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    padding: 24,
+  },
+  spinnerTitle: {
+    marginTop: 20,
+    fontSize: 24,
+  },
+  spinnerSubtitle: {
+    marginTop: 10,
+    fontSize: 12,
+  },
 }

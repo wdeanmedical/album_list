@@ -6,6 +6,7 @@ import { appInit } from '../state/actions'
 import * as Constants from '../constants/constants'
 import { Colors } from '../constants/colors'
 import Styles from '../styles/Styles'
+import Spinner from '../components/Spinner'
 
 const getArtists = artists => artists.map(artist => artist.name).join(', ')
 
@@ -54,21 +55,24 @@ class HomeScreen extends Component {
   }
 
   render() {
-    const { pendingScreen, fetchError, albums } = this.props
+    const { pendingScreen, albums } = this.props
     return (
-      <View style={Styles.container}>
-        <FlatList
-          style={Styles.itemsList}
-          data={albums}
-          renderItem={({ item }) => (
-            <Item
-              item={item}
-              enterNotesScreen={id => this.enterNotesScreen(id)}
-            />
-          )}
-          keyExtractor={item => item.id}
-        />
-      </View>
+      <>
+        <Spinner visible={pendingScreen} title="Loading Albums..." />
+        <View style={Styles.container}>
+          <FlatList
+            style={Styles.itemsList}
+            data={albums}
+            renderItem={({ item }) => (
+              <Item
+                item={item}
+                enterNotesScreen={id => this.enterNotesScreen(id)}
+              />
+            )}
+            keyExtractor={item => item.id}
+          />
+        </View>
+      </>
     )
   }
 }
@@ -85,11 +89,13 @@ const mapDispatchToProps = dispatch => ({
 HomeScreen.propTypes = {
   appInit: PropTypes.func,
   albums: PropTypes.array,
+  pendingScreen: PropTypes.bool,
 }
 
 HomeScreen.defaultProps = {
   appInit: undefined,
   albums: [],
+  pendingScreen: false,
 }
 
 export default connect(

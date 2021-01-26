@@ -5,6 +5,7 @@ import PropTypes from 'prop-types'
 import { submitNotes } from '../state/actions'
 import * as Constants from '../constants/constants'
 import Styles from '../styles/Styles'
+import Spinner from '../components/Spinner'
 
 class FormScreen extends Component {
   static navigationOptions = {
@@ -19,11 +20,6 @@ class FormScreen extends Component {
   }
 
   componentDidMount() {}
-
-  submitNotes = () => {
-    // eslint-disable-next-line react/prop-types
-    this.props.navigation.navigate(Constants.HOME_SCREEN)
-  }
 
   notesSubmitAlert = () => {
     Alert.alert(
@@ -46,6 +42,23 @@ class FormScreen extends Component {
     // eslint-disable-next-line react/prop-types
     const { id } = navigation.state.params
     const { notes } = this.state
+
+    if (!notes) {
+      Alert.alert(
+        'Invalid Input',
+        'notes cannot be empty',
+        [
+          {
+            text: 'OK',
+            onPress: () => {},
+            style: 'cancel',
+          },
+        ],
+        { cancelable: false }
+      )
+      return
+    }
+
     // eslint-disable-next-line react/prop-types
     const { submitNotes: dispatchSubmitNotes } = this.props
     dispatchSubmitNotes({ notes, id })
@@ -55,24 +68,28 @@ class FormScreen extends Component {
   }
 
   render() {
+    const { pendingScreen } = this.props
     return (
-      <View style={Styles.container}>
-        <View style={Styles.notesForm}>
-          <TextInput
-            onChangeText={text => this.setState({ notes: text })}
-            editable
-            multiline
-            maxLength={250}
-            style={Styles.notesTextInput}
-          />
-          <TouchableOpacity
-            style={Styles.notesSubmitButton}
-            onPress={() => this.handleSubmit()}
-          >
-            <Text style={Styles.notesSubmitButtonText}>Submit</Text>
-          </TouchableOpacity>
+      <>
+        <Spinner visible={pendingScreen} />
+        <View style={Styles.container}>
+          <View style={Styles.notesForm}>
+            <TextInput
+              onChangeText={text => this.setState({ notes: text })}
+              editable
+              multiline
+              maxLength={250}
+              style={Styles.notesTextInput}
+            />
+            <TouchableOpacity
+              style={Styles.notesSubmitButton}
+              onPress={() => this.handleSubmit()}
+            >
+              <Text style={Styles.notesSubmitButtonText}>Submit</Text>
+            </TouchableOpacity>
+          </View>
         </View>
-      </View>
+      </>
     )
   }
 }
@@ -88,10 +105,12 @@ const mapDispatchToProps = dispatch => ({
 
 FormScreen.propTypes = {
   submitNotes: PropTypes.func,
+  pendingScreen: PropTypes.bool,
 }
 
 FormScreen.defaultProps = {
   submitNotes: undefined,
+  pendingScreen: false,
 }
 
 export default connect(

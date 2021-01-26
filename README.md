@@ -10,4 +10,4 @@
 > yarn run react-native run-android
 ```
 
-![alt text](https://recordit.co/2oXS7qU3kg.gif "Application in action")
+![alt text](https://recordit.co/XvkoNt7Wkj.gif "Application in action")
