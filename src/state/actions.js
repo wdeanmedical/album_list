@@ -1,4 +1,4 @@
-import { APP_INIT, SUBMIT_ANSWER, TOGGLE_PENDING_SCREEN } from './action_types'
+import { APP_INIT, SUBMIT_NOTES, TOGGLE_PENDING_SCREEN } from './action_types'
 
 export const appInit = () => {
   return {
@@ -22,14 +22,15 @@ export const togglePendingScreen = payload => ({
   payload,
 })
 
-export const submitAnswer = answer => {
+export const submitNotes = params => {
+  console.log('IN submitNotes() Action', params)
   return {
-    type: SUBMIT_ANSWER.REQUESTED,
-    payload: answer,
+    type: SUBMIT_NOTES.REQUESTED,
+    params,
   }
 }
 
-export const submitAnswerSuccess = payload => ({
-  type: SUBMIT_ANSWER.SUCCESS,
+export const submitNotesSuccess = payload => ({
+  type: SUBMIT_NOTES.SUCCESS,
   payload,
 })

@@ -3,13 +3,13 @@ import { SafeAreaView } from 'react-native'
 import { Provider } from 'react-redux'
 import AppNavigator from './routes/AppNavigator'
 import configureStore from './state/create_store'
-import { Colors } from './constants/colors'
+import Styles from './styles/Styles'
 
 const store = configureStore()
 
 const App = () => (
   <Provider store={store}>
-    <SafeAreaView style={{ flex: 1, backgroundColor: Colors.charcoalGrey }}>
+    <SafeAreaView style={Styles.app}>
       <AppNavigator />
     </SafeAreaView>
   </Provider>

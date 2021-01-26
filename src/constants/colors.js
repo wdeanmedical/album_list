@@ -3,6 +3,7 @@ export const Colors = {
   charcoal: '#323031',
   charcoalGrey: '#414042',
   darkGreyBackground: '#231f20',
+  headerTint: '#f7f7f7',
   darkText: '#000000',
   errorText: '#d0021b',
   facebookBlueBackground: '#32599d',

@@ -14,6 +14,16 @@ class API {
     )
     return albums
   }
+
+  static async submitNotes(notes) {
+    console.log('notes', notes)
+    const payload = { notes }
+    const data = await axios.get(POST_URL, payload).then(result => result.data)
+    if (data.error) {
+      throw data.error
+    }
+    return data
+  }
 }
 
 export default API

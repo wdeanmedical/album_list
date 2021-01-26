@@ -17,6 +17,3 @@ export const ANDROID = 'android'
 
 export const HOME_SCREEN = 'home'
 export const NOTES_SCREEN = 'notes'
-
-export const ANSWER_TRUE = 'True'
-export const ANSWER_FALSE = 'False'

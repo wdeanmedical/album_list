@@ -2,7 +2,7 @@ export const API_URL =
   'https://opentdb.com/api.php?amount=10&difficulty=hard&type=boolean'
 
 export const TOKEN =
-  'BQBXixsHmuD9GA3x0UmMeFty3aCpMhgY3_OkHE2xORC-dou6kWCqXrsD9J0zKrk6Ajt8y0g6tymtQsud8ucR8URqitKbem5_n_A7oScVc_J_YWjvSxEQIQIfPJ6b4AgLmy2dGQRXnQOGyZ9pUjhd'
+  'BQBj7rVB2SXKFVwXZCAIA4jLt4R-ec3F9hC3L2ZTkKF4Ftj9jS56t-5dcgXiZ2oMb3lT828GZDYO9QSpHgqLQzjUY5LYINNDTN7TmcaulSoRZoDQWQnUojkimizXwBQTEZ9ILmiXy7IuVFRtMSIE'
 
 export const GET_URL =
   'https://api.spotify.com/v1/browse/new-releases?country=US&limit=50&offset=0'
