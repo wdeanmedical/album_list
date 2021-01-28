@@ -4,7 +4,6 @@ import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import { appInit } from '../state/actions'
 import * as Constants from '../constants/constants'
-import { Colors } from '../constants/colors'
 import Styles from '../styles/Styles'
 import Spinner from '../components/Spinner'
 
@@ -20,9 +19,7 @@ const Item = ({ item, enterNotesScreen }) => {
       <Image source={{ uri: images[0].url }} style={Styles.itemImage} />
       <View style={Styles.itemText}>
         <Text style={Styles.albumName}>{name}</Text>
-        <Text style={{ color: Colors.charcoalGrey }}>
-          {getArtists(artists)}
-        </Text>
+        <Text style={Styles.artistName}>{getArtists(artists)}</Text>
       </View>
       <TouchableOpacity
         style={Styles.notesButton}
