@@ -1,5 +1,5 @@
 export const TOKEN =
-  'BQCz4_19Y78hgNhtFR5aaw1h0ymx0kLhuoO8OTQ0hjobruPBziKgTp5z4u3-i0otrA0NUmYT_lx80GYop4lweisH716SQDG_bq6qwwyqTWA9OM0BHSAOylZknft98KkLw7lPMdCbZ0pXY6664Y-s'
+  'BQAFoJT-M4GcUqGZ-h3FGfa_LqZf6IXsSF6qLuNWBzV_F9BWvd2wMLAUaNvxaL_nWBUqQVHNFklS5ua_MGIBmFwrgRHJrliZbGVY_GNVjFBoPexF9-XQPPe1QkzEKkCQsO4ABdlfDEZ7y6RfvUyBNa2moEjT7oGgr2M'
 
 export const GET_URL =
   'https://api.spotify.com/v1/browse/new-releases?country=US&limit=50&offset=0'

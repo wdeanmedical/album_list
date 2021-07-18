@@ -1,7 +1,6 @@
-import React, { Component } from 'react'
+import React, { useEffect } from 'react'
 import { FlatList, Image, Text, TouchableOpacity, View } from 'react-native'
-import { connect } from 'react-redux'
-import PropTypes from 'prop-types'
+import { useDispatch, useSelector } from 'react-redux'
 import { appInit } from '../state/actions'
 import * as Constants from '../constants/constants'
 import Styles from '../styles/Styles'
@@ -31,71 +30,41 @@ const Item = ({ item, enterNotesScreen }) => {
   )
 }
 
-class HomeScreen extends Component {
-  static navigationOptions = {
-    title: 'New Releases',
-    headerStyle: Styles.headerStyle,
-    headerTintColor: Styles.headerTintColor,
-    headerTitleStyle: Styles.headerTitleStyle,
-  }
+const HomeScreen = props => {
+  const dispatch = useDispatch()
+  const app = useSelector(state => state.app)
 
-  state = {}
+  useEffect(() => {
+    dispatch(appInit())
+  }, [])
 
-  componentDidMount() {
-    const { appInit: dispatchAppInit } = this.props
-    dispatchAppInit()
-  }
-
-  enterNotesScreen = id => {
+  const enterNotesScreen = id => {
     // eslint-disable-next-line react/prop-types
-    this.props.navigation.navigate(Constants.NOTES_SCREEN, { id })
+    props.navigation.navigate(Constants.NOTES_SCREEN, { id })
   }
 
-  render() {
-    const { pendingScreen, albums } = this.props
-    return (
-      <>
-        <Spinner visible={pendingScreen} title="Loading Albums..." />
-        <View style={Styles.container}>
-          <FlatList
-            style={Styles.itemsList}
-            data={albums}
-            renderItem={({ item }) => (
-              <Item
-                item={item}
-                enterNotesScreen={id => this.enterNotesScreen(id)}
-              />
-            )}
-            keyExtractor={item => item.id}
-          />
-        </View>
-      </>
-    )
-  }
+  return (
+    <>
+      <Spinner visible={app.pendingScreen} title="Loading Albums..." />
+      <View style={Styles.container}>
+        <FlatList
+          style={Styles.itemsList}
+          data={app.albums}
+          renderItem={({ item }) => (
+            <Item item={item} enterNotesScreen={id => enterNotesScreen(id)} />
+          )}
+          keyExtractor={item => item.id}
+        />
+      </View>
+    </>
+  )
 }
 
-const mapStateToProps = state => {
-  const { pendingScreen, fetchError, albums } = state.app
-  return { pendingScreen, fetchError, albums }
-}
-
-const mapDispatchToProps = dispatch => ({
-  appInit: () => dispatch(appInit()),
+HomeScreen.navigationOptions = () => ({
+  title: 'New Releases',
+  headerStyle: Styles.headerStyle,
+  headerTintColor: Styles.headerTintColor,
+  headerTitleStyle: Styles.headerTitleStyle,
 })
 
-HomeScreen.propTypes = {
-  appInit: PropTypes.func,
-  albums: PropTypes.array,
-  pendingScreen: PropTypes.bool,
-}
-
-HomeScreen.defaultProps = {
-  appInit: undefined,
-  albums: [],
-  pendingScreen: false,
-}
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(HomeScreen)
+export default HomeScreen

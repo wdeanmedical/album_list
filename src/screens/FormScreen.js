@@ -1,27 +1,17 @@
-import React, { Component } from 'react'
+import React, { useState } from 'react'
 import { TextInput, Text, TouchableOpacity, View, Alert } from 'react-native'
-import { connect } from 'react-redux'
-import PropTypes from 'prop-types'
+import { useSelector, useDispatch } from 'react-redux'
 import { submitNotes } from '../state/actions'
 import * as Constants from '../constants/constants'
 import Styles from '../styles/Styles'
 import Spinner from '../components/Spinner'
 
-class FormScreen extends Component {
-  static navigationOptions = {
-    title: 'Notes',
-    headerStyle: Styles.headerStyle,
-    headerTintColor: Styles.headerTintColor,
-    headerTitleStyle: Styles.headerTitleStyle,
-  }
+const FormScreen = props => {
+  const [notes, setNotes] = useState('')
+  const dispatch = useDispatch()
+  const app = useSelector(state => state.app)
 
-  state = {
-    notes: '',
-  }
-
-  componentDidMount() {}
-
-  notesSubmitAlert = () => {
+  const notesSubmitAlert = () => {
     Alert.alert(
       'Notes Submitted',
       '',
@@ -36,12 +26,9 @@ class FormScreen extends Component {
     )
   }
 
-  handleSubmit = () => {
+  const handleSubmit = () => {
     // eslint-disable-next-line react/prop-types
-    const { navigation } = this.props
-    // eslint-disable-next-line react/prop-types
-    const { id } = navigation.state.params
-    const { notes } = this.state
+    const { id } = props.navigation.state.params
 
     if (!notes) {
       Alert.alert(
@@ -59,61 +46,41 @@ class FormScreen extends Component {
       return
     }
 
+    dispatch(submitNotes({ notes, id }))
     // eslint-disable-next-line react/prop-types
-    const { submitNotes: dispatchSubmitNotes } = this.props
-    dispatchSubmitNotes({ notes, id })
-    // eslint-disable-next-line react/prop-types
-    navigation.navigate(Constants.HOME_SCREEN)
-    this.notesSubmitAlert()
+    props.navigation.navigate(Constants.HOME_SCREEN)
+    notesSubmitAlert()
   }
 
-  render() {
-    const { pendingScreen } = this.props
-    return (
-      <>
-        <Spinner visible={pendingScreen} />
-        <View style={Styles.container}>
-          <View style={Styles.notesForm}>
-            <TextInput
-              onChangeText={text => this.setState({ notes: text })}
-              editable
-              multiline
-              maxLength={250}
-              style={Styles.notesTextInput}
-            />
-            <TouchableOpacity
-              style={Styles.notesSubmitButton}
-              onPress={() => this.handleSubmit()}
-            >
-              <Text style={Styles.notesSubmitButtonText}>Submit</Text>
-            </TouchableOpacity>
-          </View>
+  return (
+    <>
+      <Spinner visible={app.pendingScreen} />
+      <View style={Styles.container}>
+        <View style={Styles.notesForm}>
+          <TextInput
+            onChangeText={text => setNotes(text)}
+            editable
+            multiline
+            maxLength={250}
+            style={Styles.notesTextInput}
+          />
+          <TouchableOpacity
+            style={Styles.notesSubmitButton}
+            onPress={() => handleSubmit()}
+          >
+            <Text style={Styles.notesSubmitButtonText}>Submit</Text>
+          </TouchableOpacity>
         </View>
-      </>
-    )
-  }
+      </View>
+    </>
+  )
 }
 
-const mapStateToProps = state => {
-  const { pendingScreen, fetchError, albums } = state.app
-  return { pendingScreen, fetchError, albums }
-}
-
-const mapDispatchToProps = dispatch => ({
-  submitNotes: params => dispatch(submitNotes(params)),
+FormScreen.navigationOptions = () => ({
+  title: 'Notes',
+  headerStyle: Styles.headerStyle,
+  headerTintColor: Styles.headerTintColor,
+  headerTitleStyle: Styles.headerTitleStyle,
 })
 
-FormScreen.propTypes = {
-  submitNotes: PropTypes.func,
-  pendingScreen: PropTypes.bool,
-}
-
-FormScreen.defaultProps = {
-  submitNotes: undefined,
-  pendingScreen: false,
-}
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(FormScreen)
+export default FormScreen
