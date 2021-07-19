@@ -10,7 +10,7 @@
 ```
 Get a current token from https://developer.spotify.com/console/get-new-releases/
 
-Add the value to line 1 of /src/constants/end-point.js
+Add the value to line 1 of /src/constants/end-point.ts
 
 ```
 > yarn run react-native run-ios
